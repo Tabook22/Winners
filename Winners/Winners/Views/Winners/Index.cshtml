@@ -19,11 +19,22 @@
         padding-right:10px;
     }
 </style>
-<h2>أسماء الفائزين بالمسابقة الإسبوعية لمهرجان صلالة السياحي 2016</h2>
+<div class="row "style="position:relative;height:300px;margin-top:100px;">
+<div style="position:absolute;top:50%;margin-top:-100px;left:50%;margin-left:-100px;width:200px;height:200px;">
+    <img src="~/Content/logo.png" style="width:200px;height:200px;" />
+</div>
+</div>
 
+<h2>أسماء الفائزين بالمسابقة الإسبوعية لمهرجان صلالة السياحي 2016</h2>
+<div class="row">
+    <div class="col-md-12" style="font-weight:bold;font-size:20px;color:green;">
+        إجمالي عدد المشاركين:@ViewBag.TotalUsers
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-7 alert alert-success" role="alert">
+        <!--
 @using (Html.BeginForm("Index", "Home"))
 {
     var grid = new WebGrid(Model, canSort: false, canPage: false, rowsPerPage: 100);
@@ -47,7 +58,7 @@
                 ), mode: WebGridPagerModes.Numeric)
     </div>
 }
-
+ -->
     </div>
     <div class="col-md-5 alert alert-warning" role="alert">
         <div>
@@ -113,7 +124,14 @@
 @section scripts{
    <script>
        $(function () {
+           
+
            $(".winl").on("click", function () {
+               //check to see if the button is clicked before and to do that we check for the class
+               if ($(this).hasClass("btn-success")) {
+                   alert("لقد تم إختيار الفائز من قبل");
+                   return false;
+               }
                $(this).removeClass("btn-danger");
                $(this).addClass("btn-success");
                var $na=$(this).closest("tr").find(".wname");
@@ -126,7 +144,7 @@
                    data: "",
                    dataType: "Json",
                    success: function (data) {
-                       $($na).text(data.g_name + "  " + data.g_tel);
+                       $($na).text(data.g_name + "   " + data.g_tel);
 
                    }
 

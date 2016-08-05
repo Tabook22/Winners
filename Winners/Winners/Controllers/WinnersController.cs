@@ -16,6 +16,7 @@ namespace Winners.Controllers
             //TODO:Get a list of all the winners
             var getWinners = (from a in db.answers
                               select a);
+            ViewBag.TotalUsers = getWinners.Count() + 1;
             return View(getWinners);
         }
 
