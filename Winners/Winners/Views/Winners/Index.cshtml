@@ -1,0 +1,139 @@
+﻿@model IEnumerable<Winners.Models.tbl_gust_Answers>
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    #tbl tr td{
+        border-bottom:1px solid #222;
+        padding-top:10px;
+    }
+    .btn{
+        width:100px;
+    }
+
+    .wname{
+        font-weight:bold;
+        color:#000;
+        font-size:20px;
+        padding-right:10px;
+    }
+</style>
+<h2>أسماء الفائزين بالمسابقة الإسبوعية لمهرجان صلالة السياحي 2016</h2>
+
+
+<div class="row">
+    <div class="col-md-7 alert alert-success" role="alert">
+@using (Html.BeginForm("Index", "Home"))
+{
+    var grid = new WebGrid(Model, canSort: false, canPage: false, rowsPerPage: 100);
+    //---This variable is used for creating dynamic row value----
+    int rowVal = 0;
+    <div>
+        @grid.GetHtml(tableStyle: "table",
+       headerStyle: "alert alert-warning",
+   alternatingRowStyle: "info",
+ columns:
+            grid.Columns
+            (
+                 grid.Column("م", format: item => rowVal = rowVal + 1),
+        //grid.Column("g_date", header: "التاريخ", canSort: true),
+        grid.Column("g_name", header: "الأسم", canSort: false),
+        //grid.Column("g_email", header: "البريد الإلكتروني", canSort: true),
+        grid.Column("g_tel", header: "رقم الهاتف", canSort: false),
+        grid.Column("q_no", header: "رقم السؤال", canSort: false),
+        grid.Column("q_ans", header: "رقم الإيجابة", canSort: false)
+
+                ), mode: WebGridPagerModes.Numeric)
+    </div>
+}
+
+    </div>
+    <div class="col-md-5 alert alert-warning" role="alert">
+        <div>
+            <p style="font-size:20px;color:#000;font-weight:bold;">إسماء الفائزين العشرة بالمسابقة</p>
+        </div>
+        <div class="wlst">
+<table id="tbl">
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn1" value="الفائز الأول " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn2" value="الفائز الثاني " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn3" value="الفائز الثالث " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn4" value="الفائز الرابع " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn5" value="الفائز الخامس " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn6" value="الفائز السادس " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn7" value="الفائز السابع " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn8" value="الفائز الثامن " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn9" value="الفائز التاسع " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز العاشر " class="btn btn-danger winl" /></td>
+        <td><span class="wname"></span></td>
+        <td></td>
+    </tr>
+</table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+   <script>
+       $(function () {
+           $(".winl").on("click", function () {
+               $(this).removeClass("btn-danger");
+               $(this).addClass("btn-success");
+               var $na=$(this).closest("tr").find(".wname");
+               var url = {
+                   myurl : '@Url.Action("getName", "Winners")'
+               }
+               $.ajax({
+                   type: "POST",
+                   url: url.myurl,
+                   data: "",
+                   dataType: "Json",
+                   success: function (data) {
+                       $($na).text(data.g_name + "  " + data.g_tel);
+
+                   }
+
+               });
+           });
+       });
+      
+    </script> 
+    }
+
