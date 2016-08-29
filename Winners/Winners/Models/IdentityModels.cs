@@ -27,6 +27,7 @@ namespace Winners.Models
 
         public DbSet<tbl_gust_Answers> answers { get; set; }
         public DbSet<tbl_winners> winners { get; set; }
+        public DbSet<Logins> logins { set; get; }
 
         public static ApplicationDbContext Create()
         {

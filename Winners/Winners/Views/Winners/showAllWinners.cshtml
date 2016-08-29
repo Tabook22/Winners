@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "showAllWinners";
+}
+
+<h2>showAllWinners</h2>
+<style>
+    .active{
+        color:red;
+        font-weight:bold;
+        padding:5px;
+    }
+</style>
+<div>
+    <div ng-controller="myController">
+        <table>
+            <tr>
+                <td>Search:</td>
+                <td><input type="text" ng-model="search[searchBy]" /></td>
+            </tr>
+            <tr>
+                <td>Search By:</td>
+                <td>
+                    <select ng-model="searchBy">
+                        <option value="$"></option>
+                        <option value="g_name">Guest Name</option>
+                        <option value="g_tel">Guest Tel</option>
+                        <option value="q_no">Question No.</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <td>م</td>
+                <td>التاريخ</td>
+                <td>الإسم</td>
+                <td>الهاتف</td>
+                <td>رقم السؤال</td>
+                <td>الإيجابة</td>
+            </tr>
+            <tr ng-repeat="w in Winners | filter:search">
+                <td>{{$index + 1}}</td>
+                <td>{{w.g_date | mydate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{w.g_name}}</td>
+                <td>{{w.g_tel}}</td>
+                <td>{{w.q_no}}</td>
+                <td>{{w.q_ans}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+

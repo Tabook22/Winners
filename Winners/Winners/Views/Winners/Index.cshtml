@@ -26,105 +26,175 @@
 </div>
 
 <h2>أسماء الفائزين بالمسابقة الإسبوعية لمهرجان صلالة السياحي 2016</h2>
-<div class="row">
+<div class="row" ng-controller="myController">
     <div class="col-md-12" style="font-weight:bold;font-size:20px;color:green;">
-        إجمالي عدد المشاركين:@ViewBag.TotalUsers
+        إجمالي عدد المشاركين:{{TotalWinners}}
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-7 alert alert-success" role="alert">
+            <div>
+                <table>
+                    <tr>
+                        <td>البحث:</td>
+                        <td><input type="text" ng-model="search[searchBy]" /></td>
+                    </tr>
+                    <tr>
+                        <td>بحث بإستخدام:</td>
+                        <td>
+                            <select ng-model="searchBy">
+                                <option value="$"></option>
+                                <option value="g_name">Guest Name</option>
+                                <option value="g_tel">Guest Tel</option>
+                                <option value="q_no">Question No.</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <hr />
+                </div>
+                <table class="table table-bordered table-responsive">
+                    <tr>
+                        <td>م</td>
+                        <td>التاريخ</td>
+                        <td>الإسم</td>
+                        <td>الهاتف</td>
+                        <td>رقم السؤال</td>
+                        <td>الإيجابة</td>
+                    </tr>
+                    <tr ng-repeat="w in Winners | filter:search| start: (currentPage - 1) * pageSize | limitTo: pageSize">
+                        <td>{{$index + 1}}</td>
+                        <td>{{w.g_date | mydate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{w.g_name}}</td>
+                        <td>{{w.g_tel}}</td>
+                        <td>{{w.q_no}}</td>
+                        <td>{{w.q_ans}}</td>
+
+                    </tr>
+                    <tr>
+                        <pagination total-items="list.length" items-per-page="pageSize" ng-model="currentPage" max-size="5"
+                                    class="pagination-sm"></pagination>
+                    </tr>
+                </table>
+                
+            </div>
+        </div>
+        <div class="col-md-5 alert alert-warning" role="alert">
+            <div>
+                <p style="font-size:20px;color:#000;font-weight:bold;">إسماء الفائزين العشرة بالمسابقة</p>
+            </div>
+            <div class="wlst">
+                <table id="tbl">
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn1" value="الفائز الأول " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn2" value="الفائز الثاني " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn3" value="الفائز الثالث " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn4" value="الفائز الرابع " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn5" value="الفائز الخامس " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn6" value="الفائز السادس " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn7" value="الفائز السابع " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn8" value="الفائز الثامن " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn9" value="الفائز التاسع " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز العاشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز الحادي عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز الثاني عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز الثالث عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز الرابع عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز الخامش عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز السادس عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز السابع عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز الثامن عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز التاسع عشر " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز العشرون " class="btn btn-danger winl" /></td>
+                        <td><span class="wname"></span></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-md-7 alert alert-success" role="alert">
-        <!--
-@using (Html.BeginForm("Index", "Home"))
-{
-    var grid = new WebGrid(Model, canSort: false, canPage: false, rowsPerPage: 100);
-    //---This variable is used for creating dynamic row value----
-    int rowVal = 0;
-    <div>
-        @grid.GetHtml(tableStyle: "table",
-       headerStyle: "alert alert-warning",
-   alternatingRowStyle: "info",
- columns:
-            grid.Columns
-            (
-                 grid.Column("م", format: item => rowVal = rowVal + 1),
-        //grid.Column("g_date", header: "التاريخ", canSort: true),
-        grid.Column("g_name", header: "الأسم", canSort: false),
-        //grid.Column("g_email", header: "البريد الإلكتروني", canSort: true),
-        grid.Column("g_tel", header: "رقم الهاتف", canSort: false),
-        grid.Column("q_no", header: "رقم السؤال", canSort: false),
-        grid.Column("q_ans", header: "رقم الإيجابة", canSort: false)
-
-                ), mode: WebGridPagerModes.Numeric)
-    </div>
-}
- -->
-    </div>
-    <div class="col-md-5 alert alert-warning" role="alert">
-        <div>
-            <p style="font-size:20px;color:#000;font-weight:bold;">إسماء الفائزين العشرة بالمسابقة</p>
-        </div>
-        <div class="wlst">
-<table id="tbl">
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn1" value="الفائز الأول " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn2" value="الفائز الثاني " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn3" value="الفائز الثالث " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn4" value="الفائز الرابع " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn5" value="الفائز الخامس " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn6" value="الفائز السادس " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn7" value="الفائز السابع " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn8" value="الفائز الثامن " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn9" value="الفائز التاسع " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><input type="button" name="الفائز الأول" id="btn10" value="الفائز العاشر " class="btn btn-danger winl" /></td>
-        <td><span class="wname"></span></td>
-        <td></td>
-    </tr>
-</table>
-        </div>
-    </div>
-</div>
-
 @section scripts{
    <script>
        $(function () {
-           
 
            $(".winl").on("click", function () {
                //check to see if the button is clicked before and to do that we check for the class
@@ -145,9 +215,7 @@
                    dataType: "Json",
                    success: function (data) {
                        $($na).text(data.g_name + "   " + data.g_tel);
-
                    }
-
                });
            });
        });

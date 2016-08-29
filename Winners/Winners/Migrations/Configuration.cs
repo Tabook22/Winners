@@ -9,7 +9,7 @@ namespace Winners.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled =true;
         }
 
         protected override void Seed(Winners.Models.ApplicationDbContext context)

@@ -3,7 +3,7 @@ namespace Winners.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class Intial : DbMigration
     {
         public override void Up()
         {
@@ -20,6 +20,22 @@ namespace Winners.Migrations
                         q_ans = c.Int(),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Logins",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        UserName = c.String(maxLength: 100),
+                        Password = c.String(maxLength: 100),
+                        Email = c.String(maxLength: 100),
+                        Fname = c.String(maxLength: 50),
+                        Lname = c.String(maxLength: 50),
+                        HASH = c.String(),
+                        SALT = c.Binary(),
+                        DateTimeCreated = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -123,6 +139,7 @@ namespace Winners.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Logins");
             DropTable("dbo.tbl_gust_Answers");
         }
     }
